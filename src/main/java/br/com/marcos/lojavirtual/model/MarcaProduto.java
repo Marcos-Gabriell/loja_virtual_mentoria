@@ -2,6 +2,7 @@ package br.com.marcos.lojavirtual.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class MarcaProduto implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto") 
     private Long id;
 
+    @Column(name = "nome_descricao", nullable = false)
     private String nomeDesc;
 }
 
