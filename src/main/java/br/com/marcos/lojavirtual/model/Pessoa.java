@@ -2,6 +2,7 @@ package br.com.marcos.lojavirtual.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,12 @@ public abstract class Pessoa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa")
 	private Long id;
 	
-	
 	private String nome;
+
 	
+	@Column(nullable = false)
 	private String email;
-	
+
+	@Column(nullable = false)
 	private String telefone;
 }
