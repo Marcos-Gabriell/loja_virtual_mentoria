@@ -20,7 +20,7 @@ import lombok.Setter;
 public class FormaPagamento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_endereco")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_form_pagmento")
 	private Long id;
 	
 	private String descricao;
