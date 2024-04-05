@@ -1,4 +1,3 @@
-
 package br.com.marcos.lojavirtual.model;
 
 import javax.persistence.Column;
