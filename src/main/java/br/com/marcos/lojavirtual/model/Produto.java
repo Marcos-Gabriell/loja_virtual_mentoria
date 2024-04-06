@@ -1,6 +1,7 @@
 package br.com.marcos.lojavirtual.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,4 +36,25 @@ public class Produto implements Serializable{
 	private String descricao;
 	
 	
+	/** NOTA ITEM PRODUTO+ **/
+	
+	private Double peso;
+	
+	private Double largura;
+	
+	private Double altura;
+	
+	private Double profundidade;
+	
+	private BigDecimal valorVenda = BigDecimal.ZERO;
+	
+	private Integer QtdEtoque = 0;
+	
+	private Integer QtdAlertaEstoque = 0;
+	
+	private String linkYOuTube;
+	
+	private Boolean  alertaQtdEstoque = Boolean.FALSE;
+	
+	private Integer QqtdClique = 0;
 }
