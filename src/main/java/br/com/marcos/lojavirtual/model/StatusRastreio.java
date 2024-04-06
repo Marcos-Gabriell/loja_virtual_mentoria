@@ -1,5 +1,6 @@
 package br.com.marcos.lojavirtual.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "status_rastreio")
 @SequenceGenerator(name = "seq_produto", sequenceName = "seq_status_rastreio", allocationSize = 1, initialValue = 1)
-public class StatusRastreio {
+public class StatusRastreio implements Serializable{
 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_status_rastreio")
 	@Id

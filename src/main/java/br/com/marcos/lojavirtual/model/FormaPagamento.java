@@ -1,5 +1,7 @@
 package br.com.marcos.lojavirtual.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "form_pagmento")
 @SequenceGenerator(name = "seq_form_pagmento", sequenceName = "seq_form_pagmento", allocationSize = 1, initialValue = 1)
-public class FormaPagamento {
+public class FormaPagamento implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_form_pagmento")
