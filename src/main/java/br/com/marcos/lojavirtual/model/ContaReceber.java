@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.marcos.lojavirtual.enums.StatusContaPagar;
-import br.com.marcos.lojavirtual.enums.StatusContaReceber;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
