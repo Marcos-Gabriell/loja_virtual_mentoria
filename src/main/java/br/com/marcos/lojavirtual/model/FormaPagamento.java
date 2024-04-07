@@ -18,12 +18,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "form_pagmento")
-@SequenceGenerator(name = "seq_form_pagmento", sequenceName = "seq_form_pagmento", allocationSize = 1, initialValue = 1)
+@Table(name = "forma_pagamento")
+@SequenceGenerator(name = "seq_form_pagamento", sequenceName = "seq_form_pagamento", allocationSize = 1, initialValue = 1)
 public class FormaPagamento implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_form_pagmento")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_form_pagamento")
 	private Long id;
 	
     @Column(nullable = false)
