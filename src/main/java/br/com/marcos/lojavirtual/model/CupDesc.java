@@ -37,6 +37,7 @@ public class CupDesc implements Serializable {
 	
 	private BigDecimal valorPocentDesc;
 	
+    @Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataValidadeCupom;
 }
