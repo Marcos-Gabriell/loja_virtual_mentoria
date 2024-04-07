@@ -2,6 +2,7 @@ package br.com.marcos.lojavirtual.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -29,6 +30,7 @@ public class NotaItemProduto implements Serializable{
 	@Id
 	private Long id;
 	
+    @Column(nullable = false)
 	private Double quantidade;
 	
 	@ManyToOne
