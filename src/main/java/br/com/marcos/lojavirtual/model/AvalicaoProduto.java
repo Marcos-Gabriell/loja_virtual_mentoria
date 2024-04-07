@@ -21,20 +21,19 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "nota_item_produto")
-@SequenceGenerator(name = "seq_nota_item_produto", sequenceName = "seq_nota_item_produto", allocationSize = 1, initialValue = 1)
-public class NotaItemProduto implements Serializable{
+@Table(name = "avaliacao_produto")
+@SequenceGenerator(name = "seq_avaliacao_produt", sequenceName = "seq_avaliacao_produto", allocationSize = 1, initialValue = 1)
+public class AvalicaoProduto implements Serializable{
 
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_nota_item_produto")
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_avaliacao_produt")
 	private Long id;
 	
-	private Double quantidade;
+	private Integer nota;
 	
-	@ManyToOne
-	@JoinColumn(name = "nota_fiscal_compra_id", nullable = false,
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "nota_fiscal_compra_fk"))
-	private NotaFiscalCompra notaFiscalCompra;
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
+	private Pessoa pessoa;
 	
 	@ManyToOne
 	@JoinColumn(name = "produto_id", nullable = false,

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.marcos.lojavirtual.enums.StatusContaReceber;
+import br.com.marcos.lojavirtual.enums.StatusContaPagar;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,30 +28,36 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "conta_receber")
-@SequenceGenerator(name = "seq_conta_receber", sequenceName = "seq_conta_receber", allocationSize = 1, initialValue = 1)
+@Table(name = "conta_pagar")
+@SequenceGenerator(name = "seq_conta_pagar", sequenceName = "seq_conta_pagar", allocationSize = 1, initialValue = 1)
 public class ContaPagar implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_receber")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_pagar")
     private Long id;
 
     private String descricao;
 
+    private BigDecimal valorTotal;
+    
+    private BigDecimal valorDesconto;
+    
     @Enumerated(EnumType.STRING)
-    private StatusContaReceber status;
+    private StatusContaPagar status;
 
     @Temporal(TemporalType.DATE)
     private Date dtVencimento;
 
     @Temporal(TemporalType.DATE)
-    private Date pagamneto;
-
-    private BigDecimal valorTotal;
-
-    private BigDecimal valorDesconto;
+    private Date pagamento;
 
     @ManyToOne(targetEntity = Pessoa.class)
-    @JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
+    @JoinColumn(name = "pessoa_id", nullable = false,
+    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
     private Pessoa pessoa;
+    
+    @ManyToOne(targetEntity = Pessoa.class)
+    @JoinColumn(name = "pessoa_forn_id", nullable = false,
+    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_forn_fk"))
+    private Pessoa fornecedor;
 }
