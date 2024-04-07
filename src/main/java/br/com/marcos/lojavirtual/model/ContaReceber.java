@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,7 +29,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "conta_pagar")
+@Table(name = "conta_receber")
 @SequenceGenerator(name = "seq_conta_pagar", sequenceName = "seq_conta_pagar", allocationSize = 1, initialValue = 1)
 public class ContaReceber implements Serializable {
 
@@ -36,22 +37,26 @@ public class ContaReceber implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_pagar")
     private Long id;
 
+	@Column(nullable = false)
     private String descricao;
-
-    private BigDecimal valorTotal;
-    
-    private BigDecimal valorDesconto;
-    
+	
+	@Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusContaPagar status;
 
+	@Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dtVencimento;
+	
 
     @Temporal(TemporalType.DATE)
-    private Date pagamneto;
+    private Date dtPagamento;
 
- 
+	@Column(nullable = false)
+    private BigDecimal valorTotal;
+    
+    private BigDecimal valorDesconto;
+  
 
     @ManyToOne(targetEntity = Pessoa.class)
     @JoinColumn(name = "pessoa_id", nullable = false,
