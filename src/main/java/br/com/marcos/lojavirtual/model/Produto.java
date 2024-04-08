@@ -58,7 +58,7 @@ public class Produto implements Serializable{
 	private BigDecimal valorVenda = BigDecimal.ZERO;
 	
     @Column(nullable = false)
-	private Integer QtdEtoque = 0;
+	private Integer QtdEstoque = 0;
 	
 	private Integer QtdAlertaEstoque = 0;
 	
