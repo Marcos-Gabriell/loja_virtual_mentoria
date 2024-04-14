@@ -1,6 +1,8 @@
 package br.com.marcos.lojavirtual.service;
 
-@Ser
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class AcessoService {
 }
