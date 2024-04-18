@@ -1,5 +1,6 @@
 package br.com.marcos.lojavirtual;
 
+import br.com.marcos.lojavirtual.controller.AcessoController;
 import br.com.marcos.lojavirtual.model.Acesso;
 import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import br.com.marcos.lojavirtual.service.AcessoService;
@@ -17,6 +18,11 @@ class LojaVirutalMentoriaApplicationTests {
 	@Autowired
 	private AcessoRepository repository;
 
+
+	@Autowired
+	private AcessoController acessoController;
+
+
 	@Test
 	public void testCadastraAcesso() {
 
@@ -24,7 +30,7 @@ class LojaVirutalMentoriaApplicationTests {
 
 		acesso.setDescricao("ROLE_ADMIN");
 
-		repository.save(acesso);
+		acessoController.salvarAcesso(acesso);
 	}
 
 }
