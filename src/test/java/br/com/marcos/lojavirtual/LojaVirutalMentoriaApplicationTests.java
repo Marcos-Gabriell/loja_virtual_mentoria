@@ -4,19 +4,14 @@ import br.com.marcos.lojavirtual.controller.AcessoController;
 import br.com.marcos.lojavirtual.model.Acesso;
 import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import br.com.marcos.lojavirtual.service.AcessoService;
+import junit.framework.TestCase;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = LojaVirutalMentoriaApplication.class)
-class LojaVirutalMentoriaApplicationTests {
-
-
-	@Autowired
-	private AcessoService service;
-
-	@Autowired
-	private AcessoRepository repository;
+class LojaVirutalMentoriaApplicationTests extends TestCase{
 
 
 	@Autowired
