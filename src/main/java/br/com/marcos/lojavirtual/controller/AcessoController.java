@@ -1,6 +1,7 @@
 package br.com.marcos.lojavirtual.controller;
 
 import br.com.marcos.lojavirtual.model.Acesso;
+import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import br.com.marcos.lojavirtual.service.AcessoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ public class AcessoController {
 
     @Autowired
     private AcessoService service;
+    
+    @Autowired
+    private AcessoRepository repository;
 
     @ResponseBody
     @PostMapping(value = "**/salvarAcesso")
@@ -26,6 +30,16 @@ public class AcessoController {
     	Acesso acesoSalvo = service.save(acesso);
     	
     	return new ResponseEntity<Acesso>(acesoSalvo, HttpStatus.OK);
+    
+    }
+    
+    @ResponseBody
+    @PostMapping(value = "**/deleteAcesso")
+    public ResponseEntity<Acesso> deleteAcesso(@RequestBody Acesso acesso) {
+    	
+    	repository.deleteById(acesso.getId());
+    	
+    	return new ResponseEntity( HttpStatus.OK);
     
     }
 }
