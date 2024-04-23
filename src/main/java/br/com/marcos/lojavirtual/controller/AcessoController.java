@@ -3,10 +3,16 @@ package br.com.marcos.lojavirtual.controller;
 import br.com.marcos.lojavirtual.model.Acesso;
 import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import br.com.marcos.lojavirtual.service.AcessoService;
+
+import java.io.ObjectInputStream.GetField;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +41,31 @@ public class AcessoController {
     
     @ResponseBody
     @PostMapping(value = "**/deleteAcesso")
-    public ResponseEntity<Acesso> deleteAcesso(@RequestBody Acesso acesso) {
+    public ResponseEntity deleteAcesso(@RequestBody Acesso acesso) {
     	
     	repository.deleteById(acesso.getId());
     	
-    	return new ResponseEntity( HttpStatus.OK);
+    	return new ResponseEntity("Acesso removido", HttpStatus.OK);
+    
+    }
+    
+    @ResponseBody
+    @DeleteMapping(value = "**/deleteAcessoPorId/{id}")
+    public ResponseEntity deleteAcessoPorId(@PathVariable("id") Long id ) {
+    	
+    	repository.deleteById(id);
+    	
+    	return new ResponseEntity("Acesso removido", HttpStatus.OK);
+    
+    }
+    
+    @ResponseBody
+    @GetMapping(value = "**/obterAcesso/{id}")
+    public ResponseEntity<Acesso> obterAcesso(@PathVariable("id") Long id ) {
+    	
+    	Acesso acesso = repository.findById(id).get();
+    	
+    	return new ResponseEntity<Acesso>(acesso, HttpStatus.OK);
     
     }
 }
