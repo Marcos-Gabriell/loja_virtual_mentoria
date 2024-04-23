@@ -25,7 +25,13 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
 
 		acesso.setDescricao("ROLE_ADMIN");
 
-		acessoController.salvarAcesso(acesso);
+		assertEquals(true, acesso.getId() == null);
+		
+		acesso = acessoController.salvarAcesso(acesso).getBody();
+		
+		assertEquals(true, acesso.getId() > 0);
+		
+		assertEquals("ROLE_ADMIN", acesso.getDescricao());
 	}
 
 }
