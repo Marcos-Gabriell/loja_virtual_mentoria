@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +31,10 @@ public class Acesso implements GrantedAuthority {
 	@Column(name = "nome_descricao", nullable = false)
 	private String descricao;
 
+	@JsonIgnore
 	@Override
 	public String getAuthority() {
-		return null;
+		return this.descricao;
 	}
 
 }

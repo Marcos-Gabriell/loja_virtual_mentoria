@@ -8,9 +8,21 @@ import junit.framework.TestCase;
 
 import java.util.List;
 
+import javax.print.attribute.standard.Media;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(classes = LojaVirutalMentoriaApplication.class)
 class LojaVirutalMentoriaApplicationTests extends TestCase{
@@ -23,6 +35,35 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
 	@Autowired
 	private AcessoRepository repository;
 
+	
+	@Autowired
+	private WebApplicationContext wac;
+	
+	@Test
+	public void testeRestApiCadastroAcesso() throws JsonProcessingException, Exception {
+		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
+		MockMvc mockMvc = builder.build();
+		
+		Acesso acesso = new Acesso();
+		
+		acesso.setDescricao("ROLE_COMPRADOR");
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		ResultActions retornoApi = mockMvc
+				                   .perform(MockMvcRequestBuilders.post("/salvarAcesso")
+				                   .content(objectMapper.writeValueAsString(acesso))
+				                   .accept(MediaType.APPLICATION_JSON)
+				                   .contentType(MediaType.APPLICATION_JSON));
+		
+		
+		Acesso objetoRetorno = objectMapper.
+				               readValue(retornoApi.andReturn().getResponse().getContentAsString(),
+				            		   Acesso.class);
+		
+		assertEquals(acesso.getDescricao(), objetoRetorno.getDescricao());
+ 	}
+	
 	@Test
 	public void testCadastraAcesso() {
 
