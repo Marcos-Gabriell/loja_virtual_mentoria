@@ -6,6 +6,8 @@ import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import br.com.marcos.lojavirtual.service.AcessoService;
 import junit.framework.TestCase;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,6 +49,19 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
 		Acesso acesso3 = repository.findById(acesso2.getId()).orElse(null);
 		
 		assertEquals(true, acesso3 == null);
+		
+		
+		acesso = new Acesso();
+		
+		acesso.setDescricao("ROLE_ALUNO");
+		
+		acesso = acessoController.salvarAcesso(acesso).getBody();
+		
+		List<Acesso> acessos = repository.buscarAcessoDesc("ALUNO".trim().toUpperCase());
+		
+		assertEquals(1, acessos.size());
+		
+		repository.deleteById(acesso.getId());
 	}
 
 }
