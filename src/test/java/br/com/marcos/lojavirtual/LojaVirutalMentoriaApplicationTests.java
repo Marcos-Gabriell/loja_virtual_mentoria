@@ -40,8 +40,13 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
 		
 		assertEquals(acesso.getId(), acesso2.getId());
 		
+		repository.deleteById(acesso2.getId());
 		
+		repository.flush();
 		
+		Acesso acesso3 = repository.findById(acesso2.getId()).orElse(null);
+		
+		assertEquals(true, acesso3 == null);
 	}
 
 }
