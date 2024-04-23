@@ -65,6 +65,28 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
  	}
 	
 	@Test
+	public void testeRestApiDeleteAcesso() throws JsonProcessingException, Exception {
+		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
+		MockMvc mockMvc = builder.build();
+		
+		Acesso acesso = new Acesso();
+		
+		acesso.setDescricao("ROLE_TESTE_DELETE");
+		
+		acesso = repository.save(acesso);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		ResultActions retornoApi = mockMvc
+				                   .perform(MockMvcRequestBuilders.post("/deleteAcesso")
+				                   .content(objectMapper.writeValueAsString(acesso))
+				                   .accept(MediaType.APPLICATION_JSON)
+				                   .contentType(MediaType.APPLICATION_JSON));
+		
+
+ 	}
+	
+	@Test
 	public void testCadastraAcesso() {
 
 		Acesso acesso = new Acesso();
