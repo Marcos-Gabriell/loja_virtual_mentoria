@@ -17,6 +17,9 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
 	@Autowired
 	private AcessoController acessoController;
 
+	
+	@Autowired
+	private AcessoRepository repository;
 
 	@Test
 	public void testCadastraAcesso() {
@@ -32,6 +35,13 @@ class LojaVirutalMentoriaApplicationTests extends TestCase{
 		assertEquals(true, acesso.getId() > 0);
 		
 		assertEquals("ROLE_ADMIN", acesso.getDescricao());
+		
+		Acesso acesso2 = repository.findById(acesso.getId()).get();
+		
+		assertEquals(acesso.getId(), acesso2.getId());
+		
+		
+		
 	}
 
 }
