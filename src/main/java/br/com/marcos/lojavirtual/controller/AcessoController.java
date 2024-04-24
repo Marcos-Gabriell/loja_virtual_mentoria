@@ -5,6 +5,7 @@ import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import br.com.marcos.lojavirtual.service.AcessoService;
 
 import java.io.ObjectInputStream.GetField;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +67,16 @@ public class AcessoController {
     	Acesso acesso = repository.findById(id).get();
     	
     	return new ResponseEntity<Acesso>(acesso, HttpStatus.OK);
+    
+    }
+    
+    @ResponseBody
+    @GetMapping(value = "**/buscarPorDesc/{desc}")
+    public ResponseEntity<List<Acesso>> buscarPorDesc(@PathVariable("desc") String desc ) {
+    	
+    	List<Acesso> acesso = repository.buscarAcessoDesc(desc);
+    	
+    	return new ResponseEntity<List<Acesso>>(acesso, HttpStatus.OK);
     
     }
 }
