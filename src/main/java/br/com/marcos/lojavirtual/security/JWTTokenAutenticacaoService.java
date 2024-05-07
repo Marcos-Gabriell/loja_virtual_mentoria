@@ -35,6 +35,8 @@ public class JWTTokenAutenticacaoService {
 		
 		response.addHeader(HEADER_STRING, token);
 		
+		liberarCorsPolicy(response);
+		
 		response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
 
 	}
