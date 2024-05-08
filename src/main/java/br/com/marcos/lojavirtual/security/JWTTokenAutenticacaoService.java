@@ -7,10 +7,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import br.com.marcos.lojavirtual.ApplicationContextLoad;
+import br.com.marcos.lojavirtual.model.Usuario;
+import br.com.marcos.lojavirtual.repository.UsuarioRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -49,6 +53,23 @@ public class JWTTokenAutenticacaoService {
 		if(token != null) {
 			
 			String tokenLimpo = token.replace(TOKEN_PREFIX, "").trim();
+			
+			String user = Jwts.parser().setSigningKey(SECRET)
+					.parseClaimsJwt(tokenLimpo)
+					.getBody().getSubject();
+			
+			if(user != null) {
+				
+				Usuario usuario = ApplicationContextLoad.getApplicationCOntext().
+						getBean(UsuarioRepository.class).findByLogin(user);
+				
+				if(usuario != null) {
+					return new UsernamePasswordAuthenticationToken(
+							usuario.getLogin(),
+							usuario.getSenha(), 
+							usuario.getAuthorities());
+				}
+			}
 			
 		}
 		liberarCorsPolicy(response);
