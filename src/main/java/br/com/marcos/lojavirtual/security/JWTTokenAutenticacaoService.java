@@ -4,8 +4,10 @@ import static java.util.Objects.isNull;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,18 @@ public class JWTTokenAutenticacaoService {
 		
 		response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
 
+	}
+	public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response) {
+		
+		String token = request.getHeader(HEADER_STRING);
+		
+		if(token != null) {
+			
+			String tokenLimpo = token.replace(TOKEN_PREFIX, "").trim();
+			
+		}
+		liberarCorsPolicy(response);
+		return null;
 	}
 	
 	
