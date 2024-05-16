@@ -51,7 +51,6 @@ public class AcessoController {
     
     }
     
-    @Secured({"ROLE_ADMIN"})
     @ResponseBody
     @DeleteMapping(value = "**/deleteAcessoPorId/{id}")
     public ResponseEntity deleteAcessoPorId(@PathVariable("id") Long id ) {
