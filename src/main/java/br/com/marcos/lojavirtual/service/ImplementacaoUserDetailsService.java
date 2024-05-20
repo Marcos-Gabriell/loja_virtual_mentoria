@@ -10,21 +10,22 @@ import org.springframework.stereotype.Service;
 import br.com.marcos.lojavirtual.model.Usuario;
 import br.com.marcos.lojavirtual.repository.UsuarioRepository;
 
+
 @Service
 public class ImplementacaoUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UsuarioRepository repository;
-	
-	
+	private UsuarioRepository usuarioRepository;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		Usuario usuario = repository.findUserByLogin(username);
-		
-		if(usuario == null) {
-			throw new UsernameNotFoundException("Usuário não foi encontrado!");
+
+		Usuario usuario = usuarioRepository.findUserByLogin(username);/* Recebe o login pra consulta */
+
+		if (usuario == null) {
+			throw new UsernameNotFoundException("Usuário não foi encontrado");
 		}
+
 		return new User(usuario.getLogin(), usuario.getPassword(), usuario.getAuthorities());
 	}
 
