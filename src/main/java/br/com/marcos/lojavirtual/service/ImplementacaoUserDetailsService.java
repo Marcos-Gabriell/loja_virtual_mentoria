@@ -11,6 +11,7 @@ import br.com.marcos.lojavirtual.model.Usuario;
 import br.com.marcos.lojavirtual.repository.UsuarioRepository;
 
 
+
 @Service
 public class ImplementacaoUserDetailsService implements UserDetailsService {
 
