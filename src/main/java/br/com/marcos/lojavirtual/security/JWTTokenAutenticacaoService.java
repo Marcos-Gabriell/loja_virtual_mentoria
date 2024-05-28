@@ -1,5 +1,5 @@
 package br.com.marcos.lojavirtual.security;
-
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import br.com.marcos.lojavirtual.ApplicationContextLoad;
 import br.com.marcos.lojavirtual.model.Usuario;
 import br.com.marcos.lojavirtual.repository.UsuarioRepository;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 
 
 
@@ -59,9 +61,11 @@ public class JWTTokenAutenticacaoService {
 	
 	
 	/*Retorna o usuário validado com token ou caso nao seja valido retona null*/
-	public Authentication getAuthetication(HttpServletRequest request, HttpServletResponse response) {
+	public Authentication getAuthetication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String token = request.getHeader(HEADER_STRING);
+		
+		try {
 		
 		if (token != null) {
 			
@@ -90,7 +94,16 @@ public class JWTTokenAutenticacaoService {
 			
 		}
 		
-		liberacaoCors(response);
+		}catch (SignatureException e) {
+			response.getWriter().write("Token está inválido.");
+
+		}catch (ExpiredJwtException e) {
+			response.getWriter().write("Token está expirado, efetue o login novamente.");
+		}
+		finally {
+			liberacaoCors(response);
+		}
+		
 		return null;
 	}
 	
