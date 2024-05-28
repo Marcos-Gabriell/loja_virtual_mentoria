@@ -17,7 +17,6 @@ public class LojaVirutalMentoriaApplication {
 
 	public static void main(String[] args) {
 		
-		System.out.println(new BCryptPasswordEncoder().encode("admin"));
 		
 		SpringApplication.run(LojaVirutalMentoriaApplication.class, args);
 	}
