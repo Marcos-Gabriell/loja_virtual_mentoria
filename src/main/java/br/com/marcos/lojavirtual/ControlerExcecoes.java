@@ -22,6 +22,16 @@ import br.com.marcos.lojavirtual.model.dto.ObjectErroDTO;
 @ControllerAdvice
 public class ControlerExcecoes extends ResponseEntityExceptionHandler{
 
+	@ExceptionHandler(ExceptionMentoriaJava.class)
+	public ResponseEntity<Object> handleExceptionCustom (ExceptionMentoriaJava ex) {
+		
+		ObjectErroDTO objetoErroDTO = new ObjectErroDTO();
+		
+		objetoErroDTO.setError(ex.getMessage());
+		objetoErroDTO.setCode(HttpStatus.OK.toString());
+		
+		return new ResponseEntity<Object>(objetoErroDTO, HttpStatus.OK);
+	}
 	
 	
 	@ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class})
