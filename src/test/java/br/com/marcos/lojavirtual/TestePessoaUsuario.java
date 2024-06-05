@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.marcos.lojavirtual.controller.PessoaController;
 import br.com.marcos.lojavirtual.model.PessoaJuridica;
 import br.com.marcos.lojavirtual.repository.PessoaRepository;
 import br.com.marcos.lojavirtual.service.PessoaUserService;
@@ -15,14 +16,13 @@ import br.com.marcos.lojavirtual.service.PessoaUserService;
 @Transactional // Adiciona suporte para transações em testes
 public class TestePessoaUsuario {
 
+ 
     @Autowired
-    private PessoaUserService pessoaUserService;
-
-    @Autowired
-    private PessoaRepository pessoaRepository;
-
+    private PessoaController pessoaController;
+    
+    
     @Test
-    public void testCadPessoaJuridica() {
+    public void testCadPessoaJuridica() throws ExceptionMentoriaJava {
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
         pessoaJuridica.setCnpj("865545598956556");
         pessoaJuridica.setNome("Alex Fernando");
@@ -33,7 +33,7 @@ public class TestePessoaUsuario {
         pessoaJuridica.setNomeFantasia("Nome Fantasia Teste");
         pessoaJuridica.setRazaoSocial("Razão Social Teste");
 
-        pessoaRepository.save(pessoaJuridica);
+        pessoaController.salvarPj(pessoaJuridica);
 
      
     }
