@@ -1,40 +1,63 @@
 package br.com.marcos.lojavirtual;
 
+import java.util.Calendar;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.ResponseEntity;
 
 import br.com.marcos.lojavirtual.controller.PessoaController;
 import br.com.marcos.lojavirtual.model.PessoaJuridica;
 import br.com.marcos.lojavirtual.repository.PessoaRepository;
+import br.com.marcos.lojavirtual.repository.UsuarioRepository;
 import br.com.marcos.lojavirtual.service.PessoaUserService;
 
-@Profile("test")
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
 @SpringBootTest
-@Transactional // Adiciona suporte para transações em testes
 public class TestePessoaUsuario {
 
- 
-    @Autowired
+    @InjectMocks
     private PessoaController pessoaController;
-    
-    
+
+    @Mock
+    private PessoaUserService pessoaUserService;
+
+    @Mock
+    private PessoaRepository pessoaRepository;
+
+    @Mock
+    private UsuarioRepository usuarioRepository;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
-    public void testCadPessoaJuridica() throws ExceptionMentoriaJava {
+    public void testSalvarPj() throws Exception {
+
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
-        pessoaJuridica.setCnpj("865545598956556");
+        pessoaJuridica.setCnpj("" + Calendar.getInstance().getTimeInMillis());
         pessoaJuridica.setNome("Alex Fernando");
-        pessoaJuridica.setEmail("alex.fernando.egidio@gmail.com");
+        pessoaJuridica.setEmail("testesalvarpj@gmail.com");
         pessoaJuridica.setTelefone("45999795800");
         pessoaJuridica.setInscEstadual("65556565656665");
         pessoaJuridica.setInscMunicipal("55554565656565");
-        pessoaJuridica.setNomeFantasia("Nome Fantasia Teste");
-        pessoaJuridica.setRazaoSocial("Razão Social Teste");
+        pessoaJuridica.setNomeFantasia("54556565665");
+        pessoaJuridica.setRazaoSocial("4656656566");
 
-        pessoaController.salvarPj(pessoaJuridica);
+        when(pessoaUserService.salvarPessoaJuridica(any(PessoaJuridica.class))).thenReturn(pessoaJuridica);
 
-     
+        ResponseEntity<PessoaJuridica> response = pessoaController.salvarPj(pessoaJuridica);
+
+        assertNotNull(response);
+        assertEquals(pessoaJuridica.getCnpj(), response.getBody().getCnpj());
     }
 }

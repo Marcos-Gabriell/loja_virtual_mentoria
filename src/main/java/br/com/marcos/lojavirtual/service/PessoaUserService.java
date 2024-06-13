@@ -63,6 +63,7 @@ public class PessoaUserService {
 			
 			usuarioRepository.insereAcessoUserPj(usuarioPj.getId());
 			
+			/*Fazer o envio de e-mail do login e da senha*/
 			
 		}
 		
