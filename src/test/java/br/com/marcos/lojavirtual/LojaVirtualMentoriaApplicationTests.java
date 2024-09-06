@@ -3,6 +3,7 @@ package br.com.marcos.lojavirtual;
 import java.util.Calendar;
 import java.util.List;
 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,10 +26,12 @@ import br.com.marcos.lojavirtual.model.Acesso;
 import br.com.marcos.lojavirtual.repository.AcessoRepository;
 import junit.framework.TestCase;
 
+
 @Profile("test")
-@SpringBootTest(classes = LojaVirutalMentoriaApplication.class)
+@SpringBootTest(classes = LojaVirtualMentoriaApplication.class)
 public class LojaVirtualMentoriaApplicationTests extends TestCase {
 	
+
 
 	
 	@Autowired
@@ -198,6 +202,7 @@ public class LojaVirtualMentoriaApplicationTests extends TestCase {
 	    									.getResponse().getContentAsString(),
 	    									 new TypeReference<List<Acesso>> () {});
 
+
 	    assertEquals(1, retornoApiList.size());
 	    
 	    assertEquals(acesso.getDescricao(), retornoApiList.get(0).getDescricao());
@@ -218,6 +223,7 @@ public class LojaVirtualMentoriaApplicationTests extends TestCase {
 		acesso.setDescricao(descacesso);
 		
 		assertEquals(true, acesso.getId() == null);
+
 
 		/*Gravou no banco de dados*/
 		acesso = acessoController.salvarAcesso(acesso).getBody();
@@ -263,5 +269,5 @@ public class LojaVirtualMentoriaApplicationTests extends TestCase {
 		
 	}
 
-}
 
+}

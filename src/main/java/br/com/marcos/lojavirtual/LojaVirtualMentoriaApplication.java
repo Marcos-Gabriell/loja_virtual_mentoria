@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"br.com.marcos.*"})
 @EnableJpaRepositories(basePackages = {"br.com.marcos.lojavirtual.repository"})
 @EnableTransactionManagement
-public class LojaVirutalMentoriaApplication {
+public class LojaVirtualMentoriaApplication {
 
 	public static void main(String[] args) {
 		
 		
-		SpringApplication.run(LojaVirutalMentoriaApplication.class, args);
+		SpringApplication.run(LojaVirtualMentoriaApplication.class, args);
 	}
 
 }
