@@ -27,7 +27,7 @@ public class JWTTokenAutenticacaoService {
 	
 	
 	/*Token de validade de 1 ano para o desenvolvimento*/
-	private static final long EXPIRATION_TIME = 31536000000;
+	private static final long EXPIRATION_TIME = 31536000000L; 
 	
 	/*Chave de senha para juntar com o JWT*/
 	private static final String SECRET = "ss/-*-*sds565dsd-s/d-s*dsds";
